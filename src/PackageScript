@@ -50,3 +50,6 @@ def CopyFiles(src, dest, files):
 # Copy binaries.
 for cxx_task in Extension.extensions:
   builder.AddCopy(cxx_task.binary, folder_map['addons/sourcemod/extensions'])
+  if hasattr(cxx_task, 'package_libs'):
+    for library in cxx_task.package_libs:
+      builder.AddCopy(library, folder_map['addons/sourcemod/extensions'])
