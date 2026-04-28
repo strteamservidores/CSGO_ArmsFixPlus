@@ -261,7 +261,7 @@ class ExtensionConfig(object):
 
   def configure_linux(self, cxx):
     cxx.defines += ['_LINUX', 'POSIX']
-    cxx.linkflags += ['-Wl,--exclude-libs,ALL', '-lm']
+    cxx.linkflags += ['-Wl,--exclude-libs,ALL', '-Wl,-rpath,$ORIGIN', '-lm']
     if cxx.vendor == 'gcc':
       cxx.linkflags += ['-static-libgcc']
     elif cxx.vendor == 'clang':
@@ -402,6 +402,8 @@ class ExtensionConfig(object):
         lib_path = os.path.join(sdk.path, 'lib', 'public', lib) + '.lib'
         compiler.linkflags.append(compiler.Dep(lib_path))
 
+    binary.package_libs = []
+
     for library in dynamic_libs:
       source_path = os.path.join(lib_folder, library)
       output_path = os.path.join(binary.localFolder, library)
@@ -413,7 +415,8 @@ class ExtensionConfig(object):
         return link
 
       linker = make_linker(source_path, output_path)
-      compiler.linkflags[0:0] = [compiler.Dep(library, linker)]
+      compiler.linkflags.append(compiler.Dep(library, linker))
+      binary.package_libs.append(output_path)
 
     return binary
 
