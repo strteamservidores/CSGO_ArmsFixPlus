@@ -42,8 +42,10 @@ jobs:
       - name: Clone SDK dependencies
         run: |
           git clone --depth 1 --branch csgo https://github.com/alliedmodders/hl2sdk.git hl2sdk-csgo
-          git clone --depth 1 https://github.com/alliedmodders/metamod-source.git metamod-source
-          git clone --depth 1 https://github.com/alliedmodders/sourcemod.git sourcemod
+          git clone --depth 1 --recurse-submodules https://github.com/alliedmodders/metamod-source.git metamod-source
+          git clone --depth 1 --recurse-submodules https://github.com/alliedmodders/sourcemod.git sourcemod
+          git -C metamod-source submodule update --init --recursive
+          git -C sourcemod submodule update --init --recursive
 
       - name: Configure extension
         run: |
