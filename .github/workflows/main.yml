@@ -1,0 +1,51 @@
+name: Build SourceMod Extension (Linux)
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies (IMPORTANT)
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt update
+          sudo apt install -y \
+            build-essential \
+            gcc-multilib \
+            g++-multilib \
+            libc6-dev-i386
+
+      - name: Install AMBuild
+        run: pip install ambuild
+
+      - name: Configure build
+        run: |
+          python3 configure.py
+
+      - name: Compile extension
+        run: |
+          ambuild
+
+      - name: Show build output (debug)
+        run: |
+          ls -R build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: extension-linux
+          path: |
+            build/package/*
+            build/*.so
