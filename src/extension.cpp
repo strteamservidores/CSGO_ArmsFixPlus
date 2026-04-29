@@ -5,6 +5,10 @@
 #include <IPlayerHelpers.h>
 #include "extension.h"
 
+#if defined(__linux__)
+IMemAlloc *g_pMemAlloc = nullptr;
+#endif
+
 #define ARMS_ONLY_HANDS "models/weapons/v_models/arms/bare/v_bare_hands.mdl"
 #define IGNORE_ANARCHIST "tm_anarchist"
 #define ARMS_SZ_LEN 192
