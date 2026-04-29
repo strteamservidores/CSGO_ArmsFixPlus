@@ -27,7 +27,7 @@ extern "C" void Warning(const char *pMsg, ...)
     va_end(args);
 }
 
-extern "C" void _AssertValidReadPtr(const void *ptr, int count)
+extern "C" void _AssertValidReadPtr(void *ptr, int count)
 {
     (void)ptr;
     (void)count;
