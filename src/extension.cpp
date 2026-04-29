@@ -23,6 +23,14 @@ extern "C" void Warning(const char *pMsg, ...)
     va_end(args);
 }
 
+extern "C++" void ConMsg(const char *pMsg, ...)
+{
+    va_list args;
+    va_start(args, pMsg);
+    std::vfprintf(stdout, pMsg, args);
+    va_end(args);
+}
+
 // Variables
 IGameEventManager2 *gameevents = NULL;
 IForward *m_pOnArmsUpdated;
