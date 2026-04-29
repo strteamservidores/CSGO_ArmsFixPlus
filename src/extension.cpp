@@ -27,6 +27,30 @@ extern "C" void Warning(const char *pMsg, ...)
     va_end(args);
 }
 
+extern "C" void _AssertValidReadPtr(const void *ptr, int count)
+{
+    (void)ptr;
+    (void)count;
+}
+
+extern "C" void _AssertValidWritePtr(void *ptr, int count)
+{
+    (void)ptr;
+    (void)count;
+}
+
+extern "C" void _AssertValidReadWritePtr(void *ptr, int count)
+{
+    (void)ptr;
+    (void)count;
+}
+
+extern "C" void _AssertValidStringPtr(const char *ptr, int maxchar)
+{
+    (void)ptr;
+    (void)maxchar;
+}
+
 extern "C++" void ConMsg(const char *pMsg, ...)
 {
     va_list args;
