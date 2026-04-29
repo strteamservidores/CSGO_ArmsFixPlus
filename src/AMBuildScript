@@ -345,7 +345,7 @@ class ExtensionConfig(object):
     if sdk.name in ['blade', 'insurgency', 'doi', 'csgo']:
       compiler.defines += ['NETWORK_VARS_ENABLED']
 
-    if sdk.name in ['css', 'hl2dm', 'dods', 'sdk2013', 'bms', 'tf2', 'l4d', 'nucleardawn', 'l4d2', 'csgo']:
+    if sdk.name in ['css', 'hl2dm', 'dods', 'sdk2013', 'bms', 'tf2', 'l4d', 'nucleardawn', 'l4d2']:
       if builder.target_platform in ['linux', 'mac']:
         compiler.defines += ['NO_HOOK_MALLOC', 'NO_MALLOC_OVERRIDE']
 
