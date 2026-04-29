@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <cstdarg>
 #include <igameevents.h>
 #include <iserver.h>
 #include <IPlayerHelpers.h>
@@ -13,6 +14,14 @@
 #define CALL_FWD(A,B)	m_pOnArmsUpdated->PushCell(A); \
 			m_pOnArmsUpdated->PushCell(B); \
 			m_pOnArmsUpdated->Execute(NULL)
+
+extern "C" void Warning(const char *pMsg, ...)
+{
+    va_list args;
+    va_start(args, pMsg);
+    std::vfprintf(stderr, pMsg, args);
+    va_end(args);
+}
 
 // Variables
 IGameEventManager2 *gameevents = NULL;
