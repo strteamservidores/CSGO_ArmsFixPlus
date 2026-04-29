@@ -15,6 +15,14 @@
 			m_pOnArmsUpdated->PushCell(B); \
 			m_pOnArmsUpdated->Execute(NULL)
 
+struct Color
+{
+    unsigned char r;
+    unsigned char g;
+    unsigned char b;
+    unsigned char a;
+};
+
 extern "C" void Warning(const char *pMsg, ...)
 {
     va_list args;
@@ -25,6 +33,39 @@ extern "C" void Warning(const char *pMsg, ...)
 
 extern "C++" void ConMsg(const char *pMsg, ...)
 {
+    va_list args;
+    va_start(args, pMsg);
+    std::vfprintf(stdout, pMsg, args);
+    va_end(args);
+}
+
+extern "C++" void Msg(const char *pMsg, ...)
+{
+    va_list args;
+    va_start(args, pMsg);
+    std::vfprintf(stdout, pMsg, args);
+    va_end(args);
+}
+
+extern "C++" void DevMsg(const char *pMsg, ...)
+{
+    va_list args;
+    va_start(args, pMsg);
+    std::vfprintf(stdout, pMsg, args);
+    va_end(args);
+}
+
+extern "C++" void DevWarning(const char *pMsg, ...)
+{
+    va_list args;
+    va_start(args, pMsg);
+    std::vfprintf(stderr, pMsg, args);
+    va_end(args);
+}
+
+extern "C++" void ConColorMsg(const Color &clr, const char *pMsg, ...)
+{
+    (void)clr;
     va_list args;
     va_start(args, pMsg);
     std::vfprintf(stdout, pMsg, args);
